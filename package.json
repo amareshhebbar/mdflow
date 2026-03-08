@@ -1,5 +1,5 @@
 {
-  "name": "@gvamaresh/mdflow",
+ "name": "@amareshhebbar/mdflow", 
   "version": "1.0.2",
   "description": "Lightweight Markdown rendering for React without the bloat of deprecated NPM modules. Built for speed and deep UI control using modern TypeScript",
   "main": "./dist/index.js",
@@ -27,7 +27,7 @@
     "test": "vitest",
     "prepublishOnly": "npm run build"
   },
-  "author": "Amaresh Hebba",
+  "author": "Amaresh Hebbar",
   "license": "Apache-2.0",
   "type": "commonjs",
   "devDependencies": {
