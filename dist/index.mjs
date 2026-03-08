@@ -1,41 +1,3 @@
-"use strict";
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/index.ts
-var index_exports = {};
-__export(index_exports, {
-  MDFlow: () => MDFlow,
-  Parser: () => Parser,
-  mdFlow: () => mdFlow
-});
-module.exports = __toCommonJS(index_exports);
-
 // src/parse.ts
 var Parser = class {
   options;
@@ -57,10 +19,10 @@ var Parser = class {
 };
 
 // src/components/ui/md-flow.tsx
-var import_react2 = require("react");
+import { useState, useEffect } from "react";
 
 // src/components/blocks/table-block.tsx
-var import_jsx_runtime = require("react/jsx-runtime");
+import { jsx, jsxs } from "react/jsx-runtime";
 var renderTable = (lines, startIndex, theme) => {
   const rows = [];
   let i = startIndex;
@@ -72,19 +34,19 @@ var renderTable = (lines, startIndex, theme) => {
     }
     i++;
   }
-  return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { margin: "20px 0", borderRadius: theme.tableCurve, border: "1px solid #eee", overflow: "hidden" }, children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("table", { style: { width: "100%", borderCollapse: "collapse" }, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", { style: { backgroundColor: "#f8f9fa" }, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tr", { children: rows[0]?.map((col, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", { style: { padding: theme.tablePadding, textAlign: "left" }, children: parseInlineContent(col, theme) }, idx)) }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", { children: rows.slice(1).map((row, ri) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tr", { children: row.map((cell, ci) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", { style: { padding: theme.tablePadding, borderBottom: "1px solid #eee" }, children: parseInlineContent(cell, theme) }, ci)) }, ri)) })
+  return /* @__PURE__ */ jsx("div", { style: { margin: "20px 0", borderRadius: theme.tableCurve, border: "1px solid #eee", overflow: "hidden" }, children: /* @__PURE__ */ jsxs("table", { style: { width: "100%", borderCollapse: "collapse" }, children: [
+    /* @__PURE__ */ jsx("thead", { style: { backgroundColor: "#f8f9fa" }, children: /* @__PURE__ */ jsx("tr", { children: rows[0]?.map((col, idx) => /* @__PURE__ */ jsx("th", { style: { padding: theme.tablePadding, textAlign: "left" }, children: parseInlineContent(col, theme) }, idx)) }) }),
+    /* @__PURE__ */ jsx("tbody", { children: rows.slice(1).map((row, ri) => /* @__PURE__ */ jsx("tr", { children: row.map((cell, ci) => /* @__PURE__ */ jsx("td", { style: { padding: theme.tablePadding, borderBottom: "1px solid #eee" }, children: parseInlineContent(cell, theme) }, ci)) }, ri)) })
   ] }) });
 };
 var renderLink = (line, index, theme, textStyle) => {
   const linkRegex = /\[(.*?)\]\((.*?)\)/g;
   const parts = line.split(/(\[.*?\]\(.*?\))/g);
-  return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { style: { ...textStyle, margin: "0.5em 0" }, children: parts.map((part, i) => {
+  return /* @__PURE__ */ jsx("p", { style: { ...textStyle, margin: "0.5em 0" }, children: parts.map((part, i) => {
     const match = part.match(/\[(.*?)\]\((.*?)\)/);
     if (match) {
       const [_, linkText, href] = match;
-      return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+      return /* @__PURE__ */ jsx(
         "a",
         {
           href,
@@ -100,7 +62,7 @@ var renderLink = (line, index, theme, textStyle) => {
         i
       );
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: part }, i);
+    return /* @__PURE__ */ jsx("span", { children: part }, i);
   }) }, index);
 };
 var parseInlineContent = (text, theme) => {
@@ -110,12 +72,12 @@ var parseInlineContent = (text, theme) => {
   return parts.map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       const innerText = part.slice(2, -2);
-      return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: parseInlineContent(innerText, theme) }, i);
+      return /* @__PURE__ */ jsx("strong", { children: parseInlineContent(innerText, theme) }, i);
     }
     const linkMatch = part.match(/\[(.*?)\]\((.*?)\)/);
     if (linkMatch) {
       const [_, linkText, href] = linkMatch;
-      return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+      return /* @__PURE__ */ jsx(
         "a",
         {
           href,
@@ -131,12 +93,12 @@ var parseInlineContent = (text, theme) => {
         i
       );
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: part }, i);
+    return /* @__PURE__ */ jsx("span", { children: part }, i);
   });
 };
 
 // src/components/error/file-not-found.tsx
-var import_jsx_runtime2 = require("react/jsx-runtime");
+import { jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
 var DefaultErrorUI = ({ message }) => {
   const containerStyle = {
     display: "flex",
@@ -162,11 +124,11 @@ var DefaultErrorUI = ({ message }) => {
     margin: "0 0 8px 0",
     color: "#424242"
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { style: containerStyle, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { style: iconStyle, children: "\u{1F4C4}\u2715" }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("h3", { style: titleStyle, children: "Document Not Found" }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("p", { style: { margin: 0, fontSize: "14px" }, children: message || "We couldn't load the requested Markdown file." }),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+  return /* @__PURE__ */ jsxs2("div", { style: containerStyle, children: [
+    /* @__PURE__ */ jsx2("div", { style: iconStyle, children: "\u{1F4C4}\u2715" }),
+    /* @__PURE__ */ jsx2("h3", { style: titleStyle, children: "Document Not Found" }),
+    /* @__PURE__ */ jsx2("p", { style: { margin: 0, fontSize: "14px" }, children: message || "We couldn't load the requested Markdown file." }),
+    /* @__PURE__ */ jsx2(
       "button",
       {
         onClick: () => window.location.reload(),
@@ -186,17 +148,17 @@ var DefaultErrorUI = ({ message }) => {
 };
 
 // src/components/blocks/code-block.tsx
-var import_react = __toESM(require("react"));
-var import_jsx_runtime3 = require("react/jsx-runtime");
+import React from "react";
+import { jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
 var CodeBlock = ({ code, theme }) => {
-  const [copied, setCopied] = import_react.default.useState(false);
+  const [copied, setCopied] = React.useState(false);
   const copyToClipboard = () => {
     navigator.clipboard.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2e3);
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { style: { position: "relative", margin: "1.5rem 0" }, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+  return /* @__PURE__ */ jsxs3("div", { style: { position: "relative", margin: "1.5rem 0" }, children: [
+    /* @__PURE__ */ jsx3(
       "button",
       {
         onClick: copyToClipboard,
@@ -216,7 +178,7 @@ var CodeBlock = ({ code, theme }) => {
         children: copied ? "Copied!" : "Copy"
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+    /* @__PURE__ */ jsx3(
       "pre",
       {
         style: {
@@ -227,14 +189,14 @@ var CodeBlock = ({ code, theme }) => {
           border: "1px solid #eee",
           margin: 0
         },
-        children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("code", { style: { fontFamily: "monospace", color: "#fff", fontSize: "14px" }, children: code })
+        children: /* @__PURE__ */ jsx3("code", { style: { fontFamily: "monospace", color: "#fff", fontSize: "14px" }, children: code })
       }
     )
   ] });
 };
 
 // src/components/ui/md-flow.tsx
-var import_jsx_runtime4 = require("react/jsx-runtime");
+import { Fragment, jsx as jsx4, jsxs as jsxs4 } from "react/jsx-runtime";
 var MDFlow = ({
   file,
   text: initialText,
@@ -245,11 +207,11 @@ var MDFlow = ({
   width = "50%",
   align = "center"
 }) => {
-  const [content, setContent] = (0, import_react2.useState)(initialText || null);
-  const [error, setError] = (0, import_react2.useState)(false);
+  const [content, setContent] = useState(initialText || null);
+  const [error, setError] = useState(false);
   const theme = { ...defaultTheme, ...userTheme };
   const { textStyle, headingStyle } = getStyles(theme);
-  (0, import_react2.useEffect)(() => {
+  useEffect(() => {
     if (file) {
       if (!file.endsWith(".md")) {
         setError(true);
@@ -273,7 +235,7 @@ var MDFlow = ({
     }
   }, [file]);
   if (error || !content && !file) {
-    return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_jsx_runtime4.Fragment, { children: errorFileNotFound ? errorFileNotFound : /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(DefaultErrorUI, { message: errorToShow }) });
+    return /* @__PURE__ */ jsx4(Fragment, { children: errorFileNotFound ? errorFileNotFound : /* @__PURE__ */ jsx4(DefaultErrorUI, { message: errorToShow }) });
   }
   const parseMarkdown = (raw) => {
     const lines = raw.trim().split(/\r?\n/);
@@ -284,7 +246,7 @@ var MDFlow = ({
       if (!trimmed && !line.includes("<br")) continue;
       if (trimmed.startsWith("---")) {
         renderedElements.push(
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+          /* @__PURE__ */ jsx4(
             "hr",
             {
               style: {
@@ -300,7 +262,7 @@ var MDFlow = ({
       }
       if (trimmed.startsWith("<div") || trimmed.startsWith("</div") || trimmed.startsWith("<br") || trimmed.startsWith("<hr")) {
         renderedElements.push(
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { dangerouslySetInnerHTML: { __html: trimmed } }, i)
+          /* @__PURE__ */ jsx4("div", { dangerouslySetInnerHTML: { __html: trimmed } }, i)
         );
         continue;
       }
@@ -316,7 +278,7 @@ var MDFlow = ({
           i++;
         }
         renderedElements.push(
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+          /* @__PURE__ */ jsx4(
             "pre",
             {
               style: {
@@ -326,7 +288,7 @@ var MDFlow = ({
                 overflowX: "auto",
                 border: "1px solid #ddd"
               },
-              children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("code", { style: { fontFamily: "monospace", color: "#d63384" }, children: codeContent })
+              children: /* @__PURE__ */ jsx4("code", { style: { fontFamily: "monospace", color: "#d63384" }, children: codeContent })
             },
             i
           )
@@ -338,7 +300,7 @@ var MDFlow = ({
         while (i < lines.length && (lines[i].trim().startsWith("- ") || lines[i].trim().startsWith("* "))) {
           const rawContent = lines[i].trim().slice(2);
           listItems.push(
-            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+            /* @__PURE__ */ jsx4(
               "li",
               {
                 style: {
@@ -354,7 +316,7 @@ var MDFlow = ({
           i++;
         }
         renderedElements.push(
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+          /* @__PURE__ */ jsx4(
             "ul",
             {
               style: {
@@ -382,24 +344,24 @@ var MDFlow = ({
               innerCode += lines[i] + "\n";
               i++;
             }
-            listItems.push(/* @__PURE__ */ (0, import_jsx_runtime4.jsx)(CodeBlock, { code: innerCode, theme }, `inner-${i}`));
+            listItems.push(/* @__PURE__ */ jsx4(CodeBlock, { code: innerCode, theme }, `inner-${i}`));
           } else if (currentTrimmed !== "") {
             const content2 = currentTrimmed.replace(/^\d+\.\s+/, "");
             listItems.push(
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("li", { style: { marginBottom: "8px", display: "list-item", listStyleType: "decimal" }, children: parseInlineContent(content2, theme) }, i)
+              /* @__PURE__ */ jsx4("li", { style: { marginBottom: "8px", display: "list-item", listStyleType: "decimal" }, children: parseInlineContent(content2, theme) }, i)
             );
           }
           i++;
         }
         renderedElements.push(
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("ol", { style: { ...textStyle, paddingLeft: "2.5rem", margin: "1rem 0" }, children: listItems }, `ol-${i}`)
+          /* @__PURE__ */ jsx4("ol", { style: { ...textStyle, paddingLeft: "2.5rem", margin: "1rem 0" }, children: listItems }, `ol-${i}`)
         );
         i--;
         continue;
       }
       if (trimmed === "") {
         renderedElements.push(
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: { height: "1em" } }, `space-${i}`)
+          /* @__PURE__ */ jsx4("div", { style: { height: "1em" } }, `space-${i}`)
         );
         continue;
       }
@@ -413,19 +375,19 @@ var MDFlow = ({
       }
       if (trimmed.startsWith("# ")) {
         renderedElements.push(
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h1", { style: headingStyle(1), children: trimmed.slice(2) }, i)
+          /* @__PURE__ */ jsx4("h1", { style: headingStyle(1), children: trimmed.slice(2) }, i)
         );
         continue;
       }
       if (trimmed.startsWith("## ")) {
         renderedElements.push(
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h2", { style: headingStyle(2), children: trimmed.slice(3) }, i)
+          /* @__PURE__ */ jsx4("h2", { style: headingStyle(2), children: trimmed.slice(3) }, i)
         );
         continue;
       }
       if (trimmed.startsWith("### ")) {
         renderedElements.push(
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h3", { style: headingStyle(3), children: trimmed.slice(4) }, i)
+          /* @__PURE__ */ jsx4("h3", { style: headingStyle(3), children: trimmed.slice(4) }, i)
         );
         continue;
       }
@@ -434,7 +396,7 @@ var MDFlow = ({
         const [_, alt, src] = imgMatch;
         const isVideo = src.toLowerCase().endsWith(".mp4") || src.toLowerCase().endsWith(".webm");
         renderedElements.push(
-          isVideo ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("video", { src, controls: true, style: mediaStyle }, i) : /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+          isVideo ? /* @__PURE__ */ jsx4("video", { src, controls: true, style: mediaStyle }, i) : /* @__PURE__ */ jsx4(
             "img",
             {
               src,
@@ -458,11 +420,11 @@ var MDFlow = ({
           codeContent += lines[i] + "\n";
           i++;
         }
-        renderedElements.push(/* @__PURE__ */ (0, import_jsx_runtime4.jsx)(CodeBlock, { code: codeContent, theme }, i));
+        renderedElements.push(/* @__PURE__ */ jsx4(CodeBlock, { code: codeContent, theme }, i));
         continue;
       }
       renderedElements.push(
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("p", { style: textStyle, children: [
+        /* @__PURE__ */ jsxs4("p", { style: textStyle, children: [
           parseInlineContent(line, theme),
           " "
         ] }, i)
@@ -495,7 +457,7 @@ var MDFlow = ({
     textAlign: "left",
     boxSizing: "border-box"
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: { width: "100%" }, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: alignmentStyle, children: content && parseMarkdown(content) }) });
+  return /* @__PURE__ */ jsx4("div", { style: { width: "100%" }, children: /* @__PURE__ */ jsx4("div", { style: alignmentStyle, children: content && parseMarkdown(content) }) });
 };
 var defaultTheme = {
   fontFamily: "Inter, system-ui, sans-serif",
@@ -536,9 +498,8 @@ function mdFlow(markdown, options) {
   const parser = new Parser(options);
   return parser.parse(markdown);
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
+export {
   MDFlow,
   Parser,
   mdFlow
-});
+};

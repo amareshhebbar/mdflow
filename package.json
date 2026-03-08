@@ -1,5 +1,5 @@
 {
-  "name": "mdflow",
+  "name": "@gvamaresh/mdflow",
   "version": "1.0.0",
   "description": "Lightweight Markdown rendering for React without the bloat of deprecated NPM modules. Built for speed and deep UI control using modern TypeScript",
   "main": "./dist/index.js",
@@ -18,7 +18,9 @@
     "web-development",
     "frontend-tools"
   ],
-
+"publishConfig": {
+    "access": "public" 
+  },
   "files": [
     "dist"
   ],
@@ -41,5 +43,12 @@
   "dependencies": {
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
-  }
+  },"repository": {
+    "type": "git",
+    "url": "git+https://github.com/gvamaresh/mdflow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gvamaresh/mdflow/issues"
+  },
+  "homepage": "https://github.com/gvamaresh/mdflow#readme"
 }
