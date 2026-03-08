@@ -18,9 +18,6 @@
     "web-development",
     "frontend-tools"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "dist"
   ],
@@ -51,5 +48,8 @@
   "bugs": {
     "url": "https://github.com/gvamaresh/mdflow/issues"
   },
-  "homepage": "https://github.com/gvamaresh/mdflow#readme"
+  "homepage": "https://github.com/gvamaresh/mdflow#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }
