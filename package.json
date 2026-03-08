@@ -1,6 +1,6 @@
 {
   "name": "@gvamaresh/mdflow",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Lightweight Markdown rendering for React without the bloat of deprecated NPM modules. Built for speed and deep UI control using modern TypeScript",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
