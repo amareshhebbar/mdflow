@@ -1,21 +1,35 @@
 {
   "name": "mdflow",
   "version": "1.0.0",
+  "description": "Lightweight Markdown rendering for React without the bloat of deprecated NPM modules. Built for speed and deep UI control using modern TypeScript",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "keywords": [
+    "markdown",
+    "react",
+    "mdflow",
+    "converter",
+    "markdown-parser",
+    "react-component",
+    "typescript",
+    "zero-dependencies",
+    "markdown-to-react",
+    "web-development",
+    "frontend-tools"
+  ],
+
   "files": [
     "dist"
   ],
   "scripts": {
-"build": "tsup src/index.ts --format cjs,esm --dts --clean --external react",
-  "dev": "tsup src/index.ts --watch --external react",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean --external react",
+    "dev": "tsup src/index.ts --watch --external react",
     "test": "vitest",
     "prepublishOnly": "npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Amaresh Hebba",
+  "license": "Apache-2.0",
   "type": "commonjs",
   "devDependencies": {
     "@types/react": "^19.2.14",
